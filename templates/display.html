@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo GPS Display</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .photo-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .photo-item {
+      border: 1px solid #ccc;
+      padding: 10px;
+      background: #f9f9f9;
+      width: 250px;
+    }
+    img {
+      max-width: 200px;
+      height: auto;
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Photo GPS Data</h1>
+  <div class="photo-container">
+    {% for photo in photos %}
+      <div class="photo-item">
+        <img src="{{ photo.image_url }}" alt="Photo">
+        <p><strong>Filename:</strong> {{ photo.filename }}</p>
+        {% if photo.gps_data and photo.gps_data.latitude and photo.gps_data.longitude %}
+          <p><strong>Latitude:</strong> {{ photo.gps_data.latitude }}</p>
+          <p><strong>Longitude:</strong> {{ photo.gps_data.longitude }}</p>
+        {% else %}
+          <p>No GPS Data</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>
